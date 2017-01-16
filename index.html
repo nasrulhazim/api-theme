@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html style="height:100%;width:100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>api</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla&amp;amp;subset=latin-ext">
+    <link rel="stylesheet" href="assets/css/Navbar---App-Toolbar--LG--MD---Mobile-Nav--SM--XS1.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tree.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 sidebar">
+                <div class="page-header">
+                    <h3 class="text-center">BillPlz API<small>v10 </small></h3></div>
+                <div class="row">
+                    <div class="col-md-12" style="min-height:900px;height:100%;">
+                        <div>
+                            <ul class="tree">
+  <li>
+    <input type="checkbox" checked="checked"/>
+    <label class="tree_label" for="c1">Introduction</label>
+  </li>
+  <li>
+    <input type="checkbox" checked="checked"/>
+    <label class="tree_label" for="c1">Sandbox Mode</label>
+  </li>
+  <li>
+    <input type="checkbox" checked="checked"/>
+    <label class="tree_label" for="c1">API Flow</label>
+  </li>
+  <li>
+    <input type="checkbox" checked="checked"/>
+    <label class="tree_label" for="c1">Authentication</label>
+  </li>
+  <li>
+    <input type="checkbox" checked="checked"/>
+    <label class="tree_label" for="c1">v1.0</label>
+    <ul>
+          <li><span class="tree_label">Collections</span></li>
+          <li><span class="tree_label">Bills</span></li>
+          <li><span class="tree_label">Registration Check</span></li>
+    </ul>
+  </li>
+</ul>
+                        </div>
+                        <div class="page-header">
+                            <h3 class="text-center">References </h3>
+                            <h4 class="text-center"> <a href="https://codepen.io/bisserof/pen/fdtBm">Tree Menu</a></h4>
+                            <h4 class="text-center"> <a href="http://shamsoft.net/thedocs/layout_sidebar_boxed.html">TheDocs </a></h4>
+                            <h4 class="text-center"> <a href="https://www.billplz.com/api#v3">BillPlz API</a></h4></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="well">
+                            <div class="page-header">
+                                <h1>Collection <small>CREATE A COLLECTION </small></h1>
+                                <hr>
+                            </div><span>Billplz API now support creation of collection with split payment feature, the response will contain the collection’s ID that is needed in Bill API, split payment info and fields </span>
+                            <hr>
+                            <div><a class="btn btn-default" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" role="button" href="#collapse-1">SAMPLE USAGE</a>
+                                <div class="collapse" id="collapse-1">
+                                    <hr>
+                                    <div role="alert" class="alert alert-info">
+    <span>Example request with required arguments only: </span>
+</div>
+<pre>
+# Creates a collection
+curl https://www.billplz.com/api/v3/collections \
+  -u 73eb57f0-7d4e-42b9-a544-aeac6e4b0f81: \
+  -d title="My First API Collection"
+</pre>
+                                    <div role="alert" class="alert alert-info">
+    <span>Response: </span>
+</div>
+<pre>
+{
+  "id": "inbmmepb",
+  "title": "My First API Collection,
+  "logo": 
+  {
+    "thumb_url": null,
+    "avatar_url": null
+  },
+  "split_payment": 
+  {
+    "email": null,
+    "fixed_cut": null,
+    "variable_cut": null
+  }
+}
+  
+</pre>
+                                    <div role="alert" class="alert alert-info">
+    <span>Example request with optional arguments: </span>
+</div>
+<pre>
+# Creates a collection
+curl https://www.billplz.com/api/v3/collections \
+  -u 73eb57f0-7d4e-42b9-a544-aeac6e4b0f81: \
+  -F title="My First API Collection"\
+  -F logo=@/Users/Billplz/Documents/uploadPhoto.png\
+  -F split_payment[email]="verified@account.com" \
+  -F split_payment[fixed_cut]=100
+</pre>
+                                    <div role="alert" class="alert alert-info">
+    <span>Response: </span>
+</div>
+<pre>
+{
+  "id": "inbmmepb",
+  "title": "My First API Collection,
+  "logo":
+  {
+    "thumb_url": https://sample.net/assets/uploadPhoto.png,
+    "avatar_url": https://sample.net/assets/uploadPhoto.png
+  },
+  "split_payment": 
+  {
+    "email": "verified@account.com",
+    "fixed_cut": 100,
+    "variable_cut": null
+  }
+}
+</pre>
+                                </div>
+                            </div>
+                            <h3>HTTP REQUEST <small class="text-muted"> </small></h3>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>METHOD TYPE</th>
+                                            <th>ENDPOINT </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>POST </td>
+                                            <td>https://www.billplz.com/api/v3/collections </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3>REQUIRED ARGUMENTS</h3>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>PARAMETER </th>
+                                            <th>DESCRIPTION </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>title </td>
+                                            <td>The collection title. Will be displayed on bill template. String format. </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3>OPTIONAL ARGUMENTS</h3>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>PARAMETER </th>
+                                            <th>DESCRIPTION </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>logo </td>
+                                            <td>This image will be resized to avatar (40x40) and thumb (180x180) dimensions. Whitelisted formats are jpg, jpeg, gif and png. </td>
+                                        </tr>
+                                        <tr>
+                                            <td>split_payment[email] </td>
+                                            <td>The email address of the split payment’s recipient. (The account must be a verified account.) </td>
+                                        </tr>
+                                        <tr>
+                                            <td>split_payment[fixed_cut] </td>
+                                            <td>A positive integer in the smallest currency unit that is going in your account (e.g 100 cents to charge RM 1.00)&nbsp;This field is required if&nbsp;split_payment[variable_cut] is not present </td>
+                                        </tr>
+                                        <tr>
+                                            <td>split_payment[variable_cut] </td>
+                                            <td>Percentage in positive integer format that is going in your account.&nbsp;This field is required if&nbsp;split_payment[fixed_cut] is not present </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/tree.js"></script>
+</body>
+
+</html>
